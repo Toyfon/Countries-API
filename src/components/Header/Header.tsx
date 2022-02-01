@@ -1,8 +1,8 @@
 import {IoMoon, IoMoonOutline} from 'react-icons/io5'
 import {useState, useEffect} from 'react'
 
-import {Container} from './Container'
 import {HeaderElement} from "./HeaderElement";
+import {Container} from './Container'
 import {Wrapper} from "./Wrapper";
 import {Title} from "./Title";
 import {ThemeSwitcher} from "./ThemeSwitcher";

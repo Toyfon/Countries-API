@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import {FC} from "react";
-import {ResponseCountryInfoType} from "../../App";
+import {ResponseCountryInfoType} from "../../pages/HomePage";
 
 
 const Wrapper = styled.article`

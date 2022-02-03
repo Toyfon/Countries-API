@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, FC} from "react";
 import styled from "styled-components";
 
 import {Search} from './Search/Search'
@@ -24,10 +24,20 @@ const Wrapper = styled.div`
     align-items: center;
   }
 `
+type PropsType = {
+    onSearch: (search: string, region: string) => void
+}
 
-export const Controls = () => {
+export const Controls: FC<PropsType> = ({onSearch}) => {
     const [search, setSearch] = useState<string>('')
     const [region, setRegion] = useState<string>('')
+
+    useEffect(() => {
+        //@ts-ignore
+        const regionValue = region?.value || ''
+        onSearch(search,regionValue)
+        //eslint-disable-next-line
+    }, [search, region])
 
     return (
         <Wrapper>

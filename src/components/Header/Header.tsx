@@ -1,5 +1,5 @@
 import {IoMoon, IoMoonOutline} from 'react-icons/io5'
-import {useState, useEffect} from 'react'
+import {useEffect, useState} from 'react'
 
 import {HeaderElement} from "./HeaderElement";
 import {Container} from './Container'

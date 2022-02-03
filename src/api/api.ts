@@ -9,8 +9,8 @@ export const api = {
     getAllCountries() {
        return instance.get<ResponseCountryType[]>('all?fields=name,capital,flags,population,region')
     },
-    searchByCountry (name:string) {
-        return instance.get<ResponseCountryType>(`name/${name}`)
+    searchByCountry(name: string ) {
+        return instance.get<ResponseDetailsCountryType>(`name/${name}`)
     },
     searchByCode (codes:Array<string>) {
         return instance.get(`alpha?codes=${codes.join(',')}`)
@@ -79,3 +79,38 @@ type RegionalBlockType = {
     "acronym": string,
     "name": string
 }
+
+
+export type ResponseDetailsCountryType = [
+    {
+    alpha2Code: string
+    alpha3Code:string
+    altSpellings: Array<string>
+    area: number
+    borders: Array<string>
+    callingCodes: Array<string>
+    capital: string
+    cioc: string
+    currencies: Array<CurrencyType>
+    demonym: string
+    flag: string
+    flags: {
+        svg: string
+        png: string
+    }
+    gini: number
+    independent: boolean
+    languages: Array<LanguageType>
+    latlng: Array<number>
+    name: string
+    nativeName:string
+    numericCode: string
+    population: number
+    region: string
+    regionalBlocs: Array<RegionalBlockType>
+    subregion: string
+    timezones: Array<string>
+    topLevelDomain: Array<string>
+    translations: TranslationsType
+}
+]

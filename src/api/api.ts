@@ -13,7 +13,7 @@ export const api = {
         return instance.get<ResponseDetailsCountryType>(`name/${name}`)
     },
     searchByCode (codes:Array<string>) {
-        return instance.get(`alpha?codes=${codes.join(',')}`)
+        return instance.get<ResponseDetailsCountryType>(`alpha?codes=${codes.join(',')}`)
     }
 
 }

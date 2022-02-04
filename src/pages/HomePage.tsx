@@ -20,7 +20,6 @@ export const HomePage: FC<PropsType> = ({countries}) => {
 
     const navigate = useNavigate()
 
-
     const handleSearch = (search:string, region:string) => {
         let data = [...countries]
 
@@ -31,17 +30,17 @@ export const HomePage: FC<PropsType> = ({countries}) => {
             data = data.filter(c => c.name.toLowerCase().includes(search.toLowerCase()))
         }
         setFilteredCountries(data)
-
     }
 
-    const testData = filteredCountries.length ? filteredCountries : countries
+
+    const resultCountries = filteredCountries.length ? filteredCountries : countries
 
 
     return (
         <>
             <Controls onSearch={handleSearch}/>
             <List>
-                {testData.map(c => {
+                {resultCountries.map(c => {
                     const countryInfo = {
                         img: c.flags.png,
                         name: c.name,

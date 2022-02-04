@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {useNavigate} from 'react-router-dom'
-import {ResponseCountryType} from "../../api/api";
+import {useState, useEffect} from 'react'
+import {api, ResponseCountryType} from "../../api/api";
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -27,21 +28,65 @@ const InfoImage = styled.img`
 `;
 
 const InfoTitle = styled.h1`
-margin: 0;
+  margin: 0;
   font-weight: var(--fw-normal);
 `;
 
-const ListGroup = styled.div``;
+const ListGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 
-const List = styled.ul``;
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    gap: 4rem;
+  }
+`;
 
-const ListItem = styled.li``;
+const List = styled.ul`
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`;
 
-const Meta = styled.div``;
+const ListItem = styled.li`
+  line-height: 1.8;
 
-const TagGroup = styled.div``;
+  & > b {
+    font-weight: var(--fw-bold);
+  }
+`;
 
-const Tag = styled.span``;
+const Meta = styled.div`
+  margin-top: 3rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+
+  & > b {
+    font-weight: var(--fw-bold);
+  }
+
+  @media (min-width: 767px) {
+    flex-direction: row;
+    align-items: center;
+  }
+`;
+
+const TagGroup = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+`;
+
+const Tag = styled.span`
+  padding: 0 1rem;
+  background-color: var(--colors-ui-base);
+  box-shadow: var(--shadow);
+  line-height: 1.5;
+  cursor: pointer;
+`;
 
 
 export const Info = (props: ResponseCountryType) => {
@@ -56,7 +101,17 @@ export const Info = (props: ResponseCountryType) => {
         subregion, topLevelDomain, currencies = [], languages = [], borders = []
     } = props
 
+    const [neighbors, setNeighbors] = useState<string[]>([])
+
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (borders.length) {
+            api.searchByCode(borders).then(
+                ({data}) => setNeighbors(data.map(c => c.name))
+            )
+        }
+    }, [borders])
 
     return (
         <Wrapper>
@@ -103,7 +158,7 @@ export const Info = (props: ResponseCountryType) => {
                         <span>There is no border countries</span>
                     ) : (
                         <TagGroup>
-                            {borders.map(b => (<Tag key={b}>{b}</Tag>))}
+                            {neighbors.map(n => (<Tag onClick={() => navigate(`/country/${n}`)} key={n}>{n}</Tag>))}
                         </TagGroup>
                     )}
                 </Meta>

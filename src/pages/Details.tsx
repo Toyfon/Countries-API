@@ -1,13 +1,13 @@
-import {useEffect, useState} from 'react'
-import {useNavigate, useParams} from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 
-import {IoArrowBack} from 'react-icons/io5'
-import {api, ResponseCountryType} from "../api/api";
-import {Button} from "../components/Button/Button";
-import {Info} from "../components/Info/Info";
+import { IoArrowBack } from 'react-icons/io5'
+import { api, ResponseCountryType } from "../api/api";
+import { Button } from "../components/Button/Button";
+import { Info } from "../components/Info/Info";
 
 export const Details = () => {
-    const {name} = useParams()
+    const { name } = useParams()
     const navigate = useNavigate()
     const [country, setCountry] = useState<ResponseCountryType | null>(null)
 
